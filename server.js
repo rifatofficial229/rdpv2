@@ -12,7 +12,7 @@ if (!NGROK_AUTH_TOKEN) {
   process.exit(1);
 }
 
-// Function to run Linux commands (for the Render environment)
+// Remove firewall command (no need for sudo or ufw on Render)
 const runCommand = (cmd) => {
   exec(cmd, (error, stdout, stderr) => {
     if (error) console.error(`❌ Error: ${error.message}`);
@@ -20,12 +20,6 @@ const runCommand = (cmd) => {
     console.log(`✅ Output: ${stdout}`);
   });
 };
-
-// Example Linux commands (e.g., setting firewall rules, starting services)
-const enableFirewall = `sudo ufw allow 3389/tcp`; // Open RDP port 3389 on Linux firewall
-
-// Execute Linux commands (as an example, adjust based on your needs)
-runCommand(enableFirewall);
 
 // Start Ngrok tunnel
 let ngrokUrl = "";
